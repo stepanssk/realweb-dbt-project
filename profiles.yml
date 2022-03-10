@@ -1,0 +1,28 @@
+config:
+  use_colors: false
+
+realweb: # название профиля, которое указали в dbt_project.yml
+  target: dev
+  outputs:
+    
+    dev:
+      type: bigquery
+      method: service-account
+      project: realweb-152714 # название проекта в BigQuery
+      dataset: dbt_rsultanov # название вашего личного датасета (если его нет, он будет создан)
+      threads: 4
+      keyfile: /secrets/dbt_runner_for_realweb
+      timeout_seconds: 300
+      priority: interactive
+      retries: 1
+    
+    prod:
+      type: bigquery
+      method: service-account
+      project: realweb-152714 # название проекта в BigQuery
+      dataset: dbt_production # название датасета для продакшн среды
+      threads: 4
+      keyfile: /secrets/dbt_runner_for_realweb
+      timeout_seconds: 300
+      priority: interactive
+      retries: 1
