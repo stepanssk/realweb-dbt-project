@@ -1,3 +1,6 @@
+# это не тот profiles.yml, который вы ищете (с)
+# нужную вам конфигурацию для profiles.yml в .dbt можно найти в файле README
+# этот файл используется для продакшена в GCP
 config:
   use_colors: false
 
@@ -13,6 +16,7 @@ realweb: # название профиля, которое указали в dbt
       threads: 4
       keyfile: /secrets/dbt_runner_for_realweb
       timeout_seconds: 300
+      location: US
       priority: interactive
       retries: 1
     
@@ -24,5 +28,6 @@ realweb: # название профиля, которое указали в dbt
       threads: 4
       keyfile: /secrets/dbt_runner_for_realweb
       timeout_seconds: 300
+      location: US
       priority: interactive
       retries: 1

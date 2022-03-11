@@ -15,6 +15,8 @@ profile: 'realweb'
 model-paths: ["models"]
 analysis-paths: ["analyses"]
 test-paths: ["tests"]
+tests:
+  +store_failures: true
 seed-paths: ["seeds"]
 macro-paths: ["macros"]
 snapshot-paths: ["snapshots"]
@@ -32,7 +34,7 @@ clean-targets:         # directories to be removed by `dbt clean`
 # as tables. These settings can be overridden in the individual model files
 # using the `{{ config(...) }}` macro.
 models:
-  realweb-dbt:
+  realweb:
     # Config indicated by + and applies to all files under models/example/
-    example:
+    staging:
       +materialized: view

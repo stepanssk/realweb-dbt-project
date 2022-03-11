@@ -1,0 +1,10 @@
+version: 2
+
+sources:
+  
+  - name: hackaton
+    database: realweb-152714
+    tables:
+      - name: app_installs
+        description: установки приложений
+
