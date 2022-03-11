@@ -1,0 +1,11 @@
+version: 2
+
+models:
+  - name: stg_app_installs
+    description: "установки приложения"
+    columns:
+      - name: platform
+        description: "платформа установки"
+        tests:
+          - accepted_values:
+              values: ['ios', 'android']
