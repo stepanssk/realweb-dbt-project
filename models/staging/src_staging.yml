@@ -8,3 +8,6 @@ sources:
       - name: app_installs
         description: установки приложений
 
+      - name: crm_data
+        description: "таблица"
+
