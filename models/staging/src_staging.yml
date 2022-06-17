@@ -11,3 +11,36 @@ sources:
       - name: crm_data
         description: "таблица"
 
+  - name: vprok_for_dbt_ed
+    database: realweb-152714
+    tables:
+      - name: AF_installs
+        description: установки приложений из АФ
+      
+      - name: apple_search_ads
+        description: данные из кабинета Apple Search Ads
+
+      - name: facebook
+        description: данные из кабинета Facebook
+
+      - name: google_ads
+        description: данные из кабинета Google Ads
+
+      - name: huawei_ads
+        description: данные из кабинета Huawei Ads
+
+      - name: mytarget
+        description: данные из кабинета MyTarget
+
+      - name: TIKTOK
+        description: данные из кабинета TikTok
+
+      - name: vkontakte
+        description: данные из кабинета VK 
+
+      - name: yandex
+        description: данные из кабинета Яндекса 
+
+      
+
+
