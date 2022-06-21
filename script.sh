@@ -6,14 +6,15 @@
 dbt deps --profiles-dir .
 
 # Checking if it is working
-dbt debug --target dev --profiles-dir .
 dbt debug --target prod --profiles-dir .
 
 # Running
 dbt run --target prod --profiles-dir .
-# dbt run --target dev --profiles-dir .
 
 # Testing
 dbt test --target prod --profiles-dir .
+
+# Запускаем алёрты в телеграм.
+python telegram_alerts.py --profiles-dir .
 
 dbt clean --profiles-dir .
