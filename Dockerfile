@@ -9,5 +9,7 @@ WORKDIR /realweb-dbt-project
 COPY --from=builder /app/server ./
 COPY script.sh ./
 COPY . ./
+RUN pip install --no-cache-dir --upgrade pip && \
+    pip install --upgrade --no-cache-dir fal pyTelegramBotAPI
 
 ENTRYPOINT "./server"
