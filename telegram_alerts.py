@@ -5,7 +5,7 @@ import json
 token = os.environ['TELEGRAM_TOKEN']
 chat = int(os.environ['CHAT'])
 bot = telebot.TeleBot(token)
-target_path = "/alpha-dbt/target"
+target_path = "/realweb-dbt-project/target"
 
 def notify(alert):
     message = f'''
