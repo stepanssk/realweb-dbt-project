@@ -8,6 +8,7 @@ models:
         description: "The primary key for this table"
         tests:
           - unique
+          - not_null
 
   - name: my_second_dbt_model
     description: "A starter dbt model"
@@ -33,11 +34,3 @@ models:
           - unique
           - not_null
 
-  - name: rsultanov_af_installs
-    description: ""
-    columns:
-      - name: platform
-        description: "платформа установки"
-        tests:
-          - accepted_values:
-              values: ['ios', 'android']
