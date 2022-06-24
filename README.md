@@ -39,21 +39,8 @@ dbt docs serve
 6. Проверяем установку `dbt --version`. 
 7. Устанавливаем расширение `ms-python.python` в VSCode (поиск расширений - CTRL + SHIFT + X).
 8. В VSCode назначаем интерпетатор для Python в созданном пространстве dbt-env (Ctrl+Shift+P -> Python: Select Interpreter -> выбираем наше пространство dbt-env)
-9. Подключаемся к GitHub в VSCode и [скачиваем нужный репозиторий](https://code.visualstudio.com/docs/editor/versioncontrol#_cloning-a-repository) (https://github.com/realweb-msk/realweb-dbt). Перед этим на всякий случай сохраните в надежном месте открытые в VSCode файлы. Клонировать репозиторий рекомендую в корневую папку (`C:/Users/Username/`)
+9. Подключаемся к GitHub в VSCode и [скачиваем нужный репозиторий](https://code.visualstudio.com/docs/editor/versioncontrol#_cloning-a-repository) (https://github.com/realweb-msk/realweb-dbt-project). Перед этим на всякий случай сохраните в надежном месте открытые в VSCode файлы. Клонировать репозиторий рекомендую в корневую папку (`C:/Users/Username/`)
 10. В корневой папке создаем папку `.dbt`,  а в ней файл `profiles.yml` для подключения к ClickHouse. Этот файл должен находиться за пределами вашего проекта dbt, чтобы избежать передачи конфиденциальных учетных данных в git. В `profiles.yml` копируем и сохраняем следующий код:
-
-Спасибо [@nirakon](https://github.com/nirakon) за подробную инструкцию.
-
-1. [Устанавливаем Miniconda с Python 3.8](https://docs.conda.io/en/latest/miniconda.html)
-2. [Устанавливаем Visual Studio Code](https://code.visualstudio.com/download)
-3. [Устанавливаем Git](https://git-scm.com/download)
-4. Запускаем Anaconda Prompt (Miniconda3). Создаём новое пространство для dbt (версия python < 3.10) `conda create --name dbt-env python=3.9.0 pip`
-5. Переходим в него `conda activate dbt-env` и устанавливаем dbt `pip install dbt-bigquery`
-6. Проверяем установку `dbt --version`
-7. Устанавливаем расширение `ms-python.python` в VSCode.
-8. В VSCode назначаем интерпетатор для Python в созданном пространства dbt-env
-9. Подключаемся к GitHub в VSCode и [скачиваем нужный репозиторий](https://code.visualstudio.com/docs/editor/versioncontrol#_cloning-a-repository) (https://github.com/realweb-msk/realweb-dbt-project). Перед этим на всякий случай сохраните в надежном месте открытые в VSCode файлы. Клонировать репозиторий рекомендую в корневую папку (`C:/Users/Username/`).
-10. В корневой папке создаем папку `.dbt`,  а в ней файл `profiles.yml` для подключения к BigQuery. Этот файл должен находиться за пределами вашего проекта dbt, чтобы избежать передачи конфиденциальных учетных данных в git. В `profiles.yml` копируем и сохраняем следующий код: 
 
  ```yml
 # Пример profiles.yml. Обычно используется две среды dev (development) и prod (production)
