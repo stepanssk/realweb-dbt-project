@@ -40,40 +40,40 @@ dbt docs serve
 7. Устанавливаем расширение `ms-python.python` в VSCode (поиск расширений - CTRL + SHIFT + X).
 8. В VSCode назначаем интерпетатор для Python в созданном пространстве dbt-env (Ctrl+Shift+P -> Python: Select Interpreter -> выбираем наше пространство dbt-env)
 9. Подключаемся к GitHub в VSCode и [скачиваем нужный репозиторий](https://code.visualstudio.com/docs/editor/versioncontrol#_cloning-a-repository) (https://github.com/realweb-msk/realweb-dbt-project). Перед этим на всякий случай сохраните в надежном месте открытые в VSCode файлы. Клонировать репозиторий рекомендую в корневую папку (`C:/Users/Username/`)
-10. В корневой папке создаем папку `.dbt`,  а в ней файл `profiles.yml` для подключения к ClickHouse. Этот файл должен находиться за пределами вашего проекта dbt, чтобы избежать передачи конфиденциальных учетных данных в git. В `profiles.yml` копируем и сохраняем следующий код:
+10. В корневой папке создаем папку `.dbt`,  а в ней файл `profiles.yml` для подключения к ClickHouse. Этот файл должен находиться за пределами вашего проекта dbt, чтобы избежать передачи конфиденциальных учетных данных в git. DBT будет искать этот файл именно по этому адресу: `C:/Users/Username/.dbt/profiles.yml`. В `profiles.yml` копируем и сохраняем следующий код:
 
  ```yml
 # Пример profiles.yml. Обычно используется две среды dev (development) и prod (production)
 
-my-bigquery-db: # Название профиля, которое будет указано в dbt_project.yml в profile. В данном случае это "realweb"
-  target: dev 
+realweb:
   outputs:
     dev:
-      type: bigquery
-      method: service-account # Способ авторизации с помощью json ключа
-      project: [GCP project id] # Название проекта в BQ, в нашем случае это realweb-152714
-      dataset: [the name of your dbt dataset] # Обычно dbt_username (dbt_rsultanov)
-      threads: [1 or more] # Для локальной разработки можно поставить "4"
-      keyfile: [/secrets/your_keyfile] # путь к json ключу за пределами проекта dbt
-      timeout_seconds: 300 
-      location: US # Лучше не указывать, тогда будет локация по умолчанию, которая стоит в проекте BQ
+      dataset: dbt_username # ! не забудь поменять на своё имя!
+      fixed_retries: 1
+      keyfile: /Users/Username/secrets/dbt_runner_for_realweb.json #! не забудь поменять на адрес до своего json-ключа!
+      method: service-account
       priority: interactive
-      retries: 1
-
-     prod:
-       type: bigquery
-       method: service-account 
-       project: [GCP project id] # Название проекта в BQ
-       dataset: dbt_production
-       threads: 1
-       keyfile: [/secrets/your_keyfile]
-       timeout_seconds: 300
-       priority: interactive
-       retries: 1
+      project: realweb-152714
+      threads: 4
+      timeout_seconds: 300
+      location: US
+      type: bigquery
+    prod:
+      dataset: dbt_production
+      keyfile: /Users/Username/secrets/dbt_runner_for_realweb.json #! не забудь поменять на адрес до своего json-ключа!
+      method: service-account
+      priority: interactive
+      project: realweb-152714
+      threads: 4
+      timeout_seconds: 300
+      location: US
+      type: bigquery
+  target: dev
  ```
 Также необходимо получить json-ключ в GCP *(или попросить его у меня)* и положить его в надёжное место (например,в папку `secrets`)
 
 11. Выполняем в консоли `dbt debug`. Если всё хорошо, можно начать пользоваться dbt.
+12. Открыть консоль можно и в самом VSCode. Нажмите на "Терминал" , затем - "создать терминал", а потом в открывшемся окне справа выберите (˅) нужную вам консоль (н-р command prompt) 
 
 ### Вариант 2 - без использования Anaconda
 
