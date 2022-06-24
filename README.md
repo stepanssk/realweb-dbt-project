@@ -52,7 +52,7 @@ dbt docs serve
 6. Проверяем установку `dbt --version`
 7. Устанавливаем расширение `ms-python.python` в VSCode.
 8. В VSCode назначаем интерпетатор для Python в созданном пространства dbt-env
-9. Подключаемся к GitHub в VSCode и [скачиваем нужный репозиторий](https://code.visualstudio.com/docs/editor/versioncontrol#_cloning-a-repository) (https://github.com/realweb-msk/realweb-dbt). Перед этим на всякий случай сохраните в надежном месте открытые в VSCode файлы. Клонировать репозиторий рекомендую в корневую папку (`C:/Users/Username/`).
+9. Подключаемся к GitHub в VSCode и [скачиваем нужный репозиторий](https://code.visualstudio.com/docs/editor/versioncontrol#_cloning-a-repository) (https://github.com/realweb-msk/realweb-dbt-project). Перед этим на всякий случай сохраните в надежном месте открытые в VSCode файлы. Клонировать репозиторий рекомендую в корневую папку (`C:/Users/Username/`).
 10. В корневой папке создаем папку `.dbt`,  а в ней файл `profiles.yml` для подключения к BigQuery. Этот файл должен находиться за пределами вашего проекта dbt, чтобы избежать передачи конфиденциальных учетных данных в git. В `profiles.yml` копируем и сохраняем следующий код: 
 
  ```yml
