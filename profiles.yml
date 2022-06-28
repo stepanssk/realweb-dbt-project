@@ -1,33 +1,60 @@
-# это не тот profiles.yml, который вы ищете (с)
-# нужную вам конфигурацию для profiles.yml в .dbt можно найти в файле README
-# этот файл используется для продакшена в GCP
-config:
-  use_colors: false
+# # это не тот profiles.yml, который вы ищете (с)
+# # нужную вам конфигурацию для profiles.yml в .dbt можно найти в файле README
+# # этот файл используется для продакшена в GCP
+# config:
+#   use_colors: false
 
-realweb: # название профиля, которое указали в dbt_project.yml
-  target: dev
-  outputs:
+# realweb: # название профиля, которое указали в dbt_project.yml
+#   target: dev
+#   outputs:
     
-    dev:
-      type: bigquery
-      method: service-account
-      project: realweb-152714 # название проекта в BigQuery
-      dataset: dbt_rsultanov # название вашего личного датасета (если его нет, он будет создан)
-      threads: 4
-      keyfile: /secrets/dbt_runner_for_realweb
-      timeout_seconds: 300
-      location: US
-      priority: interactive
-      retries: 1
+#     dev:
+#       type: bigquery
+#       method: service-account
+#       project: realweb-152714 # название проекта в BigQuery
+#       dataset: dbt_rsultanov # название вашего личного датасета (если его нет, он будет создан)
+#       threads: 4
+#       keyfile: /secrets/dbt_runner_for_realweb
+#       timeout_seconds: 300
+#       location: US
+#       priority: interactive
+#       retries: 1
     
-    prod:
-      type: bigquery
-      method: service-account
-      project: realweb-152714 # название проекта в BigQuery
-      dataset: dbt_production # название датасета для продакшн среды
-      threads: 4
-      keyfile: /secrets/dbt_runner_for_realweb
-      timeout_seconds: 300
-      location: US
-      priority: interactive
-      retries: 1
+#     prod:
+#       type: bigquery
+#       method: service-account
+#       project: realweb-152714 # название проекта в BigQuery
+#       dataset: dbt_production # название датасета для продакшн среды
+#       threads: 4
+#       keyfile: /secrets/dbt_runner_for_realweb
+#       timeout_seconds: 300
+#       location: US
+#       priority: interactive
+#       retries: 1
+
+# Пример profiles.yml. Обычно используется две среды dev (development) и prod (production)
+
+realweb:
+ outputs:
+   dev:
+     dataset: dbt_mpopkov # ! не забудь поменять на своё имя!
+     fixed_retries: 1
+     keyfile: C:/Матвей/secrets/realweb-152714-e9d677a15274.json #! не забудь поменять на адрес до своего json-ключа!
+     method: service-account
+     priority: interactive
+     project: realweb-152714
+     threads: 4
+     timeout_seconds: 300
+     location: US
+     type: bigquery
+   prod:
+     dataset: dbt_production
+     keyfile: C:/Матвей/secrets/realweb-152714-e9d677a15274.json #! не забудь поменять на адрес до своего json-ключа!
+     method: service-account
+     priority: interactive
+     project: realweb-152714
+     threads: 4
+     timeout_seconds: 300
+     location: US
+     type: bigquery
+ target: dev
