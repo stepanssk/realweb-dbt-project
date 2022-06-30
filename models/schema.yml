@@ -34,3 +34,23 @@ models:
           - unique
           - not_null
 
+#Ваш заказчик требователен.
+# В дашборде не должно быть случайно попавших туда NULL-компаний,
+#а в столбце "платформа" не должно быть ничего кроме "ios" и "android".
+
+#В файле schema.yml задайте для вашей модели username_af_installs два теста:
+#  один для названия кампании,
+#  а другой для платформы (вдохновиться примерами можно в этом же файле).
+
+  - name: schobanu_af_installs
+    description: "schobanu установки приложения"
+    columns:
+      - name: platform
+        description: "платформа установки"
+        tests:
+          - accepted_values:
+              values: ['ios', 'android']
+      - name: campaign_name
+        description: "кампания"
+        tests:
+          - not_null
