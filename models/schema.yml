@@ -42,8 +42,8 @@ models:
 #  один для названия кампании,
 #  а другой для платформы (вдохновиться примерами можно в этом же файле).
 
-  - name: schobanu_af_installs
-    description: "schobanu установки приложения"
+  - name: dsimonova_af_installs
+    description: "dsimonova установки приложения"
     columns:
       - name: platform
         description: "платформа установки"
