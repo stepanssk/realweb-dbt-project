@@ -31,7 +31,7 @@ WITH installations_common AS (
     source,
     count(distinct appsflyer_id) as installs_qty
   FROM {{ ref('stg_af_installs') }}
-  WHERE campaign_name is not null and is_realweb and not is_ret_campaign and source!='other'
+  WHERE is_realweb and not is_ret_campaign and source!='other'
   GROUP BY date, campaign_name, adset_name, platform, source
   ORDER BY date, campaign_name, adset_name, platform, source
 ),
@@ -52,7 +52,7 @@ facebook AS (
     sum(impressions) impressions_qty,
     sum(costs) costs
 FROM {{ ref('stg_facebook') }}
-WHERE campaign_name is not null and is_realweb and not is_ret_campaign
+WHERE is_realweb and not is_ret_campaign
 GROUP BY date, campaign_name, adset_name, platform
 ORDER BY date, campaign_name, adset_name, platform
 ),
@@ -87,7 +87,7 @@ huawei_ads AS (
     sum(impressions) impressions_qty,
     sum(costs) costs
 FROM {{ ref('stg_huawei_ads') }}
-WHERE campaign_name is not null and is_realweb and not is_ret_campaign
+WHERE is_realweb and not is_ret_campaign
 GROUP BY date, campaign_name, adset_name, platform
 ORDER BY date, campaign_name, adset_name, platform
 ),
@@ -104,7 +104,7 @@ mytarget AS (
     sum(impressions) impressions_qty,
     sum(costs) costs
 FROM {{ ref('stg_mytarget') }}
-WHERE campaign_name is not null and is_realweb and not is_ret_campaign
+WHERE is_realweb and not is_ret_campaign
 GROUP BY date, campaign_name, adset_name, platform
 ORDER BY date, campaign_name, adset_name, platform
 ),
@@ -121,7 +121,7 @@ tiktok AS (
     sum(impressions) impressions_qty,
     sum(costs) costs
 FROM {{ ref('stg_tiktok') }}
-WHERE campaign_name is not null and is_realweb and not is_ret_campaign
+WHERE is_realweb and not is_ret_campaign
 GROUP BY date, campaign_name, adset_name, platform
 ORDER BY date, campaign_name, adset_name, platform
 ),
@@ -138,7 +138,7 @@ vkontakte AS (
     sum(impressions) impressions_qty,
     sum(costs) costs
 FROM {{ ref('stg_vkontakte') }}
-WHERE campaign_name is not null and is_realweb and not is_ret_campaign
+WHERE is_realweb and not is_ret_campaign
 GROUP BY date, campaign_name, adset_name, platform
 ORDER BY date, campaign_name, adset_name, platform
 ),
@@ -155,7 +155,7 @@ yandex AS (
     sum(impressions) impressions_qty,
     sum(costs) costs
 FROM {{ ref('stg_yandex') }}
-WHERE campaign_name is not null and is_realweb and not is_ret_campaign
+WHERE is_realweb and not is_ret_campaign
 GROUP BY date, campaign_name, adset_name, platform
 ORDER BY date, campaign_name, adset_name, platform
 ),
@@ -202,7 +202,7 @@ all_data AS (
     all_sources.source = installations_common.source
 )
 
--- Оставляем только платформы ios и android, а так же непустые имена рекламных кампаний
+-- Оставляем только платформы ios и android, непустые названия рекламных кампаний
 -- и ситуации, когда показы (верхний уровень воронки) не нулевые, либо установки не нулевые 
 SELECT * FROM all_data
 WHERE
