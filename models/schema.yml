@@ -34,3 +34,16 @@ models:
           - unique
           - not_null
 
+  - name: nkovaleva_af_installs
+    description: "установки, клики, показы и расходы по всем известным источникам"
+    columns:
+      - name: platform
+        description: "платформа установки"
+        tests:
+          - accepted_values:
+              values: ['ios', 'android']
+      
+      - name: campaign_name
+        description: "название рекламной кампании"
+        tests:
+          - not_null
