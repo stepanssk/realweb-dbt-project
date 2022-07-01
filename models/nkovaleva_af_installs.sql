@@ -37,6 +37,7 @@ WITH installations_common AS (
 ),
 
 -- Клики, показы, установки, расходы в разбивке по дате, кампании, группе объявления, платформе и источнику (рекламному кабинету)
+-- Только кампании Риалвеба (is_realweb=TRUE), только User Acquisition (is_ret_campaign=FALSE)
 -- Все таблицы единого формата, если нет данных по установкам, указываем null
 -- Добавляем название источника
 facebook AS (
@@ -51,6 +52,7 @@ facebook AS (
     sum(impressions) impressions_qty,
     sum(costs) costs
 FROM {{ ref('stg_facebook') }}
+WHERE campaign_name is not null and is_realweb and not is_ret_campaign
 GROUP BY date, campaign_name, adset_name, platform
 ORDER BY date, campaign_name, adset_name, platform
 ),
@@ -67,6 +69,7 @@ google_ads AS (
     sum(impressions) impressions_qty,
     sum(costs) costs
 FROM {{ ref('stg_google_ads') }}
+WHERE campaign_name is not null and is_realweb and not is_ret_campaign
 GROUP BY date, campaign_name, adset_name, platform
 ORDER BY date, campaign_name, adset_name, platform
 ),
@@ -84,6 +87,7 @@ huawei_ads AS (
     sum(impressions) impressions_qty,
     sum(costs) costs
 FROM {{ ref('stg_huawei_ads') }}
+WHERE campaign_name is not null and is_realweb and not is_ret_campaign
 GROUP BY date, campaign_name, adset_name, platform
 ORDER BY date, campaign_name, adset_name, platform
 ),
@@ -100,6 +104,7 @@ mytarget AS (
     sum(impressions) impressions_qty,
     sum(costs) costs
 FROM {{ ref('stg_mytarget') }}
+WHERE campaign_name is not null and is_realweb and not is_ret_campaign
 GROUP BY date, campaign_name, adset_name, platform
 ORDER BY date, campaign_name, adset_name, platform
 ),
@@ -116,6 +121,7 @@ tiktok AS (
     sum(impressions) impressions_qty,
     sum(costs) costs
 FROM {{ ref('stg_tiktok') }}
+WHERE campaign_name is not null and is_realweb and not is_ret_campaign
 GROUP BY date, campaign_name, adset_name, platform
 ORDER BY date, campaign_name, adset_name, platform
 ),
@@ -132,6 +138,7 @@ vkontakte AS (
     sum(impressions) impressions_qty,
     sum(costs) costs
 FROM {{ ref('stg_vkontakte') }}
+WHERE campaign_name is not null and is_realweb and not is_ret_campaign
 GROUP BY date, campaign_name, adset_name, platform
 ORDER BY date, campaign_name, adset_name, platform
 ),
@@ -148,6 +155,7 @@ yandex AS (
     sum(impressions) impressions_qty,
     sum(costs) costs
 FROM {{ ref('stg_yandex') }}
+WHERE campaign_name is not null and is_realweb and not is_ret_campaign
 GROUP BY date, campaign_name, adset_name, platform
 ORDER BY date, campaign_name, adset_name, platform
 ),
