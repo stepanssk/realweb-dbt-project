@@ -68,3 +68,4 @@ models:
         description: "наименование кампании"
         tests:
           - not_null
+          
