@@ -33,6 +33,19 @@ models:
         tests:
           - unique
           - not_null
+  - name: dbt_adurakhov_af_installs
+    description: "установки приложения"
+    columns:
+      - name: platform
+        description: "платформа установки"
+        tests:
+          - accepted_values:
+              values: ['ios', 'android']
+      
+      - name: campaign_name
+        description: "название кампании"
+        tests:
+          - not_null
 
 #Ваш заказчик требователен.
 # В дашборде не должно быть случайно попавших туда NULL-компаний,
@@ -42,20 +55,7 @@ models:
 #  один для названия кампании,
 #  а другой для платформы (вдохновиться примерами можно в этом же файле).
 
-  - name: schobanu_af_installs
-    description: "schobanu установки приложения"
-    columns:
-      - name: platform
-        description: "платформа установки"
-        tests:
-          - accepted_values:
-              values: ['ios', 'android']
-      - name: campaign_name
-        description: "кампания"
-        tests:
-          - not_null
-  
-  - name: aakhtyamova_af_installs
+   - name: aakhtyamova_af_installs
     description: "установки приложения aakhtyamova"
     columns:
       - name: platform
