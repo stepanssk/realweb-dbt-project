@@ -67,6 +67,20 @@ models:
         description: "кампания"
         tests:
           - not_null
+
+  - name: nkovaleva_af_installs
+    description: "установки, клики, показы и расходы по всем известным источникам"      
+    columns:
+      - name: campaign_name
+        description: "название рекламной кампании"
+        tests:
+          - not_null
+      - name: platform
+        description: "платформа установки"
+        tests:
+          - accepted_values:
+              values: ['ios', 'android']
+
           
   - name: dsimonova_af_installs
     description: "dsimonova установки приложения"
