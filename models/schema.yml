@@ -68,6 +68,19 @@ models:
         tests:
           - not_null
 
+  - name: krepin_af_installs
+    description: "krepin установки приложения"
+    columns:
+      - name: platform
+        description: "платформа установки"
+        tests:
+          - accepted_values:
+              values: ['ios', 'android']
+      - name: campaign_name
+        description: "кампания"
+        tests:
+          - not_null   
+
   - name: etaranova_af_installs
     columns: 
       - name: campaign_name
@@ -119,4 +132,4 @@ models:
       - name: campaign_name
         description: "кампания"
         tests:
-          - not_null
+          - not_null  
