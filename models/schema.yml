@@ -94,4 +94,16 @@ models:
         description: "кампания"
         tests:
           - not_null
-
+          
+  - name: aakhtyamova_af_installs
+    description: "aakhtyamova установки приложения"
+    columns:
+      - name: platform
+        description: "платформа установки"
+        tests:
+          - accepted_values:
+              values: ['ios', 'android']
+      - name: campaign_name
+        description: "кампания"
+        tests:
+          - not_null
