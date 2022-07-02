@@ -33,9 +33,8 @@ models:
         tests:
           - unique
           - not_null
-
-  - name: nkovaleva_af_installs
-    description: "установки, клики, показы и расходы по всем известным источникам"
+  - name: dbt_adurakhov_af_installs
+    description: "установки приложения"
     columns:
       - name: platform
         description: "платформа установки"
@@ -44,6 +43,55 @@ models:
               values: ['ios', 'android']
       
       - name: campaign_name
+        description: "название кампании"
+        tests:
+          - not_null
+
+#Ваш заказчик требователен.
+# В дашборде не должно быть случайно попавших туда NULL-компаний,
+#а в столбце "платформа" не должно быть ничего кроме "ios" и "android".
+
+#В файле schema.yml задайте для вашей модели username_af_installs два теста:
+#  один для названия кампании,
+#  а другой для платформы (вдохновиться примерами можно в этом же файле).
+
+  - name: schobanu_af_installs
+    description: "schobanu установки приложения"
+    columns:
+      - name: platform
+        description: "платформа установки"
+        tests:
+          - accepted_values:
+              values: ['ios', 'android']
+      - name: campaign_name
+        description: "кампания"
+        tests:
+          - not_null
+
+  - name: nkovaleva_af_installs
+    description: "установки, клики, показы и расходы по всем известным источникам"      
+    columns:
+      - name: campaign_name
         description: "название рекламной кампании"
         tests:
           - not_null
+      - name: platform
+        description: "платформа установки"
+        tests:
+          - accepted_values:
+              values: ['ios', 'android']
+
+          
+  - name: dsimonova_af_installs
+    description: "dsimonova установки приложения"
+    columns:
+      - name: platform
+        description: "платформа установки"
+        tests:
+          - accepted_values:
+              values: ['ios', 'android']
+      - name: campaign_name
+        description: "кампания"
+        tests:
+          - not_null
+
