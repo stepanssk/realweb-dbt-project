@@ -68,6 +68,19 @@ models:
         tests:
           - not_null
 
+  - name: etaranova_af_installs
+    columns: 
+      - name: campaign_name
+        tests:
+          - not_null
+
+      - name: platform
+        tests:
+          - accepted_values:
+              values:
+                - ios
+                - android
+
   - name: nkovaleva_af_installs
     description: "установки, клики, показы и расходы по всем известным источникам"      
     columns:
