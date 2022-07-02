@@ -68,6 +68,20 @@ models:
         tests:
           - not_null
 
+  - name: klarchenko_af_installs
+    description: "Названия компаний и платформы установки приложений"
+    columns:
+      - name: campaign_name
+        description: "название компании"
+        tests:
+          - not_null
+      
+      - name: platform
+        description: "платформа установки приложения"
+        tests:
+          - accepted_values:
+              values: ['ios', 'android']
+
   - name: krepin_af_installs
     description: "krepin установки приложения"
     columns:
@@ -133,3 +147,4 @@ models:
         description: "кампания"
         tests:
           - not_null  
+
