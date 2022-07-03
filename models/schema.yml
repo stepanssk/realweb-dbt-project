@@ -55,7 +55,7 @@ models:
 #  один для названия кампании,
 #  а другой для платформы (вдохновиться примерами можно в этом же файле).
 
- - name: schobanu_af_installs
+  - name: schobanu_af_installs
     description: "schobanu установки приложения"
     columns:
       - name: platform
@@ -148,7 +148,7 @@ models:
         tests:
           - not_null  
 
- - name: dshatalov_af_installs
+  - name: dshatalov_af_instals
     description: "check_campaign_name"
     columns:
       - name: campaign_name
