@@ -175,3 +175,15 @@ models:
         tests: 
           - not_null 
 
+  - name: agasanov_af_installs
+    description: "agasanov установки приложения"
+    columns:
+      - name: platform
+        description: "платформа установки"
+        tests:
+          - accepted_values:
+              values: ['ios', 'android']
+      - name: campaign_name
+        description: "кампания"
+        tests: 
+          - not_null 
