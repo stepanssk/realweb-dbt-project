@@ -148,3 +148,16 @@ models:
         tests:
           - not_null  
 
+  - name: msergeeva_af_installs
+    description: "msergeeva установки приложения"
+    columns:
+      - name: platform
+        description: "платформа установки"
+        tests:
+          - accepted_values:
+              values: ['ios', 'android']
+      - name: campaign_name
+        description: "кампания"
+        tests:
+          - not_null  
+
