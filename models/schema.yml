@@ -33,6 +33,19 @@ models:
         tests:
           - unique
           - not_null
+  - name: dbt_adurakhov_af_installs
+    description: "установки приложения"
+    columns:
+      - name: platform
+        description: "платформа установки"
+        tests:
+          - accepted_values:
+              values: ['ios', 'android']
+      
+      - name: campaign_name
+        description: "название кампании"
+        tests:
+          - not_null
 
 #Ваш заказчик требователен.
 # В дашборде не должно быть случайно попавших туда NULL-компаний,
@@ -52,5 +65,125 @@ models:
               values: ['ios', 'android']
       - name: campaign_name
         description: "кампания"
+        tests: 
+          - not_null
+
+  - name: klarchenko_af_installs
+    description: "Названия компаний и платформы установки приложений"
+    columns:
+      - name: campaign_name
+        description: "название компании"
         tests:
-          - not_null          
+          - not_null
+      
+      - name: platform
+        description: "платформа установки приложения"
+        tests:
+          - accepted_values:
+              values: ['ios', 'android']
+
+  - name: krepin_af_installs
+    description: "krepin установки приложения"
+    columns:
+      - name: platform
+        description: "платформа установки"
+        tests:
+          - accepted_values:
+              values: ['ios', 'android']
+      - name: campaign_name
+        description: "кампания"
+        tests:
+          - not_null   
+
+  - name: etaranova_af_installs
+    columns: 
+      - name: campaign_name
+        tests:
+          - not_null
+
+      - name: platform
+        tests:
+          - accepted_values:
+              values:
+                - ios
+                - android
+
+  - name: nkovaleva_af_installs
+    description: "установки, клики, показы и расходы по всем известным источникам"      
+    columns:
+      - name: campaign_name
+        description: "название рекламной кампании"
+        tests:
+          - not_null
+      - name: platform
+        description: "платформа установки"
+        tests:
+          - accepted_values:
+              values: ['ios', 'android']
+
+          
+  - name: dsimonova_af_installs
+    description: "dsimonova установки приложения"
+    columns:
+      - name: platform
+        description: "платформа установки"
+        tests:
+          - accepted_values:
+              values: ['ios', 'android']
+      - name: campaign_name
+        description: "кампания"
+        tests:
+          - not_null
+          
+  - name: aakhtyamova_af_installs
+    description: "aakhtyamova установки приложения"
+    columns:
+      - name: platform
+        description: "платформа установки"
+        tests:
+          - accepted_values:
+              values: ['ios', 'android']
+      - name: campaign_name
+        description: "кампания"
+        tests:
+          - not_null  
+
+  - name: dshatalov_af_instals
+    description: "check_campaign_name"
+    columns:
+      - name: campaign_name
+        description: "название компании"
+        tests:
+          - not_null
+      
+      - name: platform
+        description: "check_platform"
+        tests:
+          - accepted_values:
+              values: ['ios', 'android']
+
+  - name: srybalko_af_installs
+    description: "schobanu установки приложения"
+    columns:
+      - name: platform
+        description: "платформа установки"
+        tests:
+          - accepted_values:
+              values: ['ios', 'android']
+      - name: campaign_name
+        description: "кампания"
+        tests: 
+          - not_null 
+
+  - name: agasanov_af_installs
+    description: "agasanov установки приложения"
+    columns:
+      - name: platform
+        description: "платформа установки"
+        tests:
+          - accepted_values:
+              values: ['ios', 'android']
+      - name: campaign_name
+        description: "кампания"
+        tests: 
+          - not_null 
