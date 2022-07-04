@@ -172,8 +172,8 @@ models:
               values: ['ios', 'android']
       - name: campaign_name
         description: "кампания"
-        tests: 
-          - not_null 
+        tests:
+          - not_null  
 
   - name: agasanov_af_installs
     description: "agasanov установки приложения"
