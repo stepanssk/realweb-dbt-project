@@ -55,8 +55,8 @@ models:
 #  один для названия кампании,
 #  а другой для платформы (вдохновиться примерами можно в этом же файле).
 
-  - name: schobanu_af_installs
-    description: "schobanu установки приложения"
+  - name: pmoiseev_af_installs
+    description: "pmoiseev установки приложения"
     columns:
       - name: platform
         description: "платформа установки"
@@ -170,10 +170,50 @@ models:
         tests:
           - accepted_values:
               values: ['ios', 'android']
+      
+      - name: campaign_name
+        description: "название кампании"
+        tests:
+          - not_null  
+
+  - name: agasanov_af_installs
+    description: "agasanov установки приложения"
+    columns:
+      - name: platform
+        description: "платформа установки"
+        tests:
+          - accepted_values:
+              values: ['ios', 'android']
       - name: campaign_name
         description: "кампания"
         tests: 
           - not_null 
+
+  - name: omaltseva_af_installs
+    columns:
+      - name: platform
+        tests:
+          - accepted_values:
+              values: ['ios', 'android']
+      - name: campaign_name
+        description: "название кампании"
+        tests:
+          - not_null
+
+  - name: szhankov_af_installs
+    description: "данные из рекламных кабинетов + установки"
+    columns:
+      - name: platform
+        description: "платформа установки"
+        tests:
+          - accepted_values:
+              values: ['ios', 'android']
+
+      - name: campaign_name
+        description: "название кампании"
+        tests:
+          - not_null
+
 
   - name: kshulakov_af_installs
     description: "kshulakov установки приложения"
@@ -187,3 +227,4 @@ models:
         description: "кампания"
         tests:
           - not_null  
+          
