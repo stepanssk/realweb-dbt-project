@@ -269,3 +269,12 @@ models:
         tests: 
           - not_null 
           
+  - name: kportnova_af_installs
+    columns:
+      - name: platform
+        tests:
+          - accepted_values:
+              values: ['ios', 'android']
+      - name: campaign_name
+        tests:
+          - not_null          
