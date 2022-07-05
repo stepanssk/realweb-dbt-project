@@ -214,7 +214,6 @@ models:
         tests:
           - not_null
 
-
   - name: kshulakov_af_installs
     description: "kshulakov установки приложения"
     columns:
@@ -228,3 +227,15 @@ models:
         tests:
           - not_null  
           
+  - name: aiatcyna_af_installs
+    description: "aiatcyna installs clicks costs impressions for all sources"
+    columns:
+      - name: platform
+        description: "intstall platform"
+        tests:
+          - accepted_values:
+              values: ['ios', 'android']
+      - name: campaign_name
+        description: campaign
+        tests: 
+          - not_null
