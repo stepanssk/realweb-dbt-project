@@ -213,3 +213,18 @@ models:
         description: "название кампании"
         tests:
           - not_null
+
+
+  - name: kshulakov_af_installs
+    description: "kshulakov установки приложения"
+    columns:
+      - name: platform
+        description: "платформа установки"
+        tests:
+          - accepted_values:
+              values: ['ios', 'android']
+      - name: campaign_name
+        description: "кампания"
+        tests:
+          - not_null  
+          
