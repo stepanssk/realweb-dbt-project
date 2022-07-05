@@ -176,7 +176,6 @@ installs_and_cabinet AS (
   SELECT 
     IFNULL(installs.date,all_ads_cabinet.date) as date,
     IFNULL(installs.campaign_name,all_ads_cabinet.campaign_name) as campaign_name,
-    --all_ads_cabinet.campaign_name as campaign_name,
     IFNULL(installs.adset_name,all_ads_cabinet.adset_name) as adset_name,
     IFNULL(installs.platform,all_ads_cabinet.platform) as platform,
     IFNULL(installs.source,all_ads_cabinet.source) as source,
