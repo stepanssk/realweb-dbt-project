@@ -269,3 +269,16 @@ models:
         tests: 
           - not_null 
           
+
+  - name: vglukhovtsev_af_installs
+    description: "данные из installs и рекламных кабинетов"
+    columns:
+      - name: platform
+        description: "intstall platform"
+        tests:
+          - accepted_values:
+              values: ['ios', 'android']
+      - name: campaign_name
+        description: campaign
+        tests: 
+          - not_null
