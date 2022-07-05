@@ -55,8 +55,20 @@ models:
 #  один для названия кампании,
 #  а другой для платформы (вдохновиться примерами можно в этом же файле).
 
-  - name: schobanu_af_installs
-    description: "schobanu установки приложения"
+  - name: schobanu_af_installs 
+    columns:
+      - name: platform
+        description: "платформа установки"
+        tests:
+          - accepted_values:
+              values: ['ios', 'android']
+      - name: campaign_name
+        description: "кампания"
+        tests: 
+          - not_null
+
+  - name: pmoiseev_af_installs
+    description: "pmoiseev установки приложения"
     columns:
       - name: platform
         description: "платформа установки"
@@ -148,7 +160,9 @@ models:
         tests:
           - not_null  
 
-  - name: dshatalov_af_installs
+
+  - name: dshatalov_af_instals
+
     description: "check_campaign_name"
     columns:
       - name: campaign_name
@@ -170,10 +184,77 @@ models:
         tests:
           - accepted_values:
               values: ['ios', 'android']
+      
+      - name: campaign_name
+        description: "название кампании"
+        tests:
+          - not_null  
+
+  - name: agasanov_af_installs
+    description: "agasanov установки приложения"
+    columns:
+      - name: platform
+        description: "платформа установки"
+        tests:
+          - accepted_values:
+              values: ['ios', 'android']
       - name: campaign_name
         description: "кампания"
         tests: 
           - not_null 
+
+
+  - name: omaltseva_af_installs
+    columns:
+      - name: platform
+        tests:
+          - accepted_values:
+              values: ['ios', 'android']
+      - name: campaign_name
+        description: "название кампании"
+        tests:
+          - not_null
+
+  - name: szhankov_af_installs
+    description: "данные из рекламных кабинетов + установки"
+    columns:
+      - name: platform
+        description: "платформа установки"
+        tests:
+          - accepted_values:
+              values: ['ios', 'android']
+
+      - name: campaign_name
+        description: "название кампании"
+        tests:
+          - not_null
+
+  - name: kshulakov_af_installs
+    description: "kshulakov установки приложения"
+    columns:
+      - name: platform
+        description: "платформа установки"
+        tests:
+          - accepted_values:
+              values: ['ios', 'android']
+      - name: campaign_name
+        description: "кампания"
+        tests: 
+          - not_null 
+          
+  - name: aiatcyna_af_installs
+    description: "aiatcyna installs clicks costs impressions for all sources"
+    columns:
+      - name: platform
+        description: "intstall platform"
+        tests:
+          - accepted_values:
+              values: ['ios', 'android']
+      - name: campaign_name
+        description: campaign
+        tests: 
+          - not_null
+
 
   - name: sokruzhnov_af_installs
     description: "sokruzhnov установки приложения"
@@ -187,3 +268,4 @@ models:
         description: "кампания"
         tests: 
           - not_null 
+          
