@@ -175,3 +175,24 @@ models:
         tests: 
           - not_null 
 
+
+
+  - name: dgamayunov_af_installs
+    description: "Проверка ненулевых названий кампаний и платформы"
+    columns:
+      - name: campaign_name
+        description: "Название кампании"
+        tests:
+          - not_null
+
+      - name: platform
+        description: "Проверка ios и android"
+        tests:
+          - accepted_values:
+              values: ['ios', 'android']
+
+      - name: costs
+        description: "Тест на превышение лимита по величине расходов (условно не больше 5000)"
+        tests:
+          - exceed_costs_limit
+
