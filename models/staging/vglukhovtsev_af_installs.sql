@@ -197,6 +197,5 @@ installs_and_cabinet AS (
     all_ads_cabinet.source = installs.source
 )
 
-
 --Итоговый результат совмещенных таблиц. Оставляем только платформы ios и android
 SELECT* FROM installs_and_cabinet
