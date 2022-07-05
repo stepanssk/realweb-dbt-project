@@ -177,6 +177,7 @@ models:
 
 
 
+
   - name: dgamayunov_af_installs
     description: "Проверка ненулевых названий кампаний и платформы"
     columns:
