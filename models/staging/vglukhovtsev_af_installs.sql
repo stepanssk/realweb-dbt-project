@@ -57,7 +57,7 @@ SELECT
         campaign_name,
         adset_name,
         platform,
-        'google' as source, 
+        'google_ads' as source, 
         SUM(clicks) clicks,
         SUM(impressions) impressions,
         SUM(installs) installs,
