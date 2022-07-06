@@ -298,7 +298,6 @@ models:
         tests:
           - exceed_costs_limit
 
-
   - name: vglukhovtsev_af_installs
     description: "данные из installs и рекламных кабинетов"
     columns:
@@ -311,3 +310,4 @@ models:
         description: campaign
         tests: 
           - not_null 
+
