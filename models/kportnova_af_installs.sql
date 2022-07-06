@@ -86,7 +86,7 @@ huawei_ads AS (
         campaign_name,
         "" as adset_name,
         platform,
-        'huawei_ads' AS source,
+        'huawei' AS source,
         clicks,
         impressions,
         NULL as installs,
