@@ -82,7 +82,7 @@ google_ads AS (
 ),
 
 huawei_ads AS (
-   SELECT 
+  SELECT 
     date,
     campaign_name,
     'x' AS adset_name,
@@ -98,7 +98,7 @@ huawei_ads AS (
   GROUP BY 1, 2, 3, 4
 ),
 
- mytarget AS (
+mytarget AS (
   SELECT 
     date,
     campaign_name,
@@ -115,8 +115,9 @@ huawei_ads AS (
   GROUP BY 1, 2, 3, 4
  ),
 
- tiktok AS (
-     SELECT 
+
+tiktok AS (
+  SELECT 
     date,
     campaign_name,
     adset_name,
@@ -132,25 +133,26 @@ huawei_ads AS (
   GROUP BY 1, 2, 3, 4
  ),
 
- vkontakte AS (
-   SELECT 
-    date,
-    campaign_name,
-    adset_name,
-    platform,
-    'vkontakte' AS source,
-    SUM(clicks) clicks,
-    SUM(impressions) impressions,
-    SUM(costs) costs,
-    NULL AS installs --у vkontakte нет данных по установкам, поэтому пока оставим null
+
+vkontakte AS (
+  SELECT 
+      date,
+      campaign_name,
+      adset_name,
+      platform,
+      'vkontakte' AS source,
+      SUM(clicks) clicks,
+      SUM(impressions) impressions,
+      SUM(costs) costs,
+      NULL AS installs --у vkontakte нет данных по установкам, поэтому пока оставим null
   FROM {{ ref('stg_vkontakte')}}
   WHERE is_realweb
     AND NOT is_ret_campaign
   GROUP BY 1, 2, 3, 4
  ),
 
- yandex AS (
-   SELECT 
+yandex AS (
+  SELECT 
     date,
     campaign_name,
     adset_name,
@@ -201,4 +203,6 @@ union_with_installs_from_af AS (
     USING (date, campaign_name, adset_name, platform, source))
 
 
-SELECT * FROM union_with_installs_from_af
+SELECT * 
+FROM union_with_installs_from_af
+WHERE platform IN ('ios', 'android')
