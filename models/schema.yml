@@ -121,19 +121,7 @@ models:
           - accepted_values:
               values: ['ios', 'android']
 
-  - name: dzhdanov_af_installs
-    description: "установки приложения по источникам"      
-    columns:
-      - name: campaign_name
-        description: "рекламная кампания"
-        tests:
-          - not_null
-      - name: platform
-        description: "платформа приложения"
-        tests:
-          - accepted_values:
-              values: ['ios', 'android']
-          
+
   - name: dsimonova_af_installs
     description: "dsimonova установки приложения"
     columns:
@@ -187,3 +175,16 @@ models:
         tests: 
           - not_null 
 
+  - name: dzhdanov_af_installs
+    description: "установки приложения по источникам"      
+    columns:
+      - name: campaign_name
+        description: "рекламная кампания"
+        tests:
+          - not_null
+      - name: platform
+        description: "платформа приложения"
+        tests:
+          - accepted_values:
+              values: ['ios', 'android']
+          
