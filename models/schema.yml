@@ -312,6 +312,20 @@ models:
         tests: 
           - not_null 
 
+
+  - name: anasonova_af_installs
+    description: "установки приложения"
+    columns:
+      - name: platform
+        description: "платформа установки"
+        tests:
+          - accepted_values:
+              values: ['ios', 'android']
+      - name: campaign_name
+        description: "кампания"
+        tests: 
+          - not_null 
+
   - name: dzhdanov_af_installs
     description: "установки приложения по источникам"      
     columns:
@@ -325,4 +339,4 @@ models:
           - accepted_values:
               values: ['ios', 'android']
               
-          
+
