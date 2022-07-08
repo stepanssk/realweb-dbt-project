@@ -20,7 +20,7 @@ WITH
     af_installs AS (
         SELECT 
             date, 
-            COUNT(DISTINCT appsflyer_id) AS installations, 
+            COUNT(DISTINCT appsflyer_id) AS installs, 
             campaign_name, 
             adset_name, 
             platform, 
@@ -75,7 +75,7 @@ WITH
             campaign_name, 
             '' AS adset_name, 
             platform,
-            'huawei_ads' AS source, 
+            'huawei' AS source, 
             SUM(impressions) AS impressions, 
             SUM(clicks) AS clicks, 
             SUM(costs) AS costs
@@ -122,14 +122,14 @@ WITH
 
     -- Данные из VK
 
-    vk AS (
+    vkontakte AS (
         SELECT 
             date, 
             NULL AS installs, 
             campaign_name, 
             adset_name, 
             platform,
-            'vk' AS source, 
+            'vkontakte' AS source, 
             SUM(impressions) AS impressions, 
             SUM(clicks) AS clicks, 
             SUM(costs) AS costs
@@ -169,7 +169,7 @@ WITH
         UNION ALL
         SELECT * FROM tiktok
         UNION ALL
-        SELECT * FROM vk
+        SELECT * FROM vkontakte
         UNION ALL
         SELECT * FROM yandex
     ),
@@ -178,26 +178,26 @@ WITH
     
     final_data AS (
         SELECT 
-            union_of_sources.date, 
-            union_of_sources.campaign_name,
-            union_of_sources.adset_name, 
-            union_of_sources.platform, 
-            union_of_sources.source,
-            COALESCE(union_of_sources.installs, af_installs.installations, 0) AS installs,
-            COALESCE(union_of_sources.impressions, 0) AS impressions,
-            COALESCE(union_of_sources.clicks, 0) AS clicks,
-            COALESCE(union_of_sources.costs, 0) AS costs,
-        FROM union_of_sources
+            COALESCE(union_of_sources.date, af_installs.date) AS date, 
+            COALESCE(union_of_sources.campaign_name, af_installs.campaign_name) AS campaign_name,
+            COALESCE(union_of_sources.adset_name, af_installs.adset_name) AS adset_name, 
+            COALESCE(union_of_sources.platform, af_installs.platform) AS platform, 
+            COALESCE(union_of_sources.source, af_installs.source) AS source,
+            COALESCE(union_of_sources.installs, af_installs.installs, 0) AS installs,
+            COALESCE(impressions, 0) AS impressions,
+            COALESCE(clicks, 0) AS clicks,
+            COALESCE(costs, 0) AS costs,
+        FROM af_installs
 
         -- Джоиним с таблицей с данными из AppsFlyer
 
-        FULL JOIN af_installs
+        FULL JOIN union_of_sources
         ON 
-            union_of_sources.date = af_installs.date AND
-            union_of_sources.campaign_name = af_installs.campaign_name AND
-            union_of_sources.adset_name = af_installs.adset_name AND
-            union_of_sources.platform = af_installs.platform AND
-            union_of_sources.source = af_installs.source
+            af_installs.date = union_of_sources.date AND
+            af_installs.campaign_name = union_of_sources.campaign_name AND
+            af_installs.adset_name = union_of_sources.adset_name AND
+            af_installs.platform = union_of_sources.platform AND
+            af_installs.source = union_of_sources.source
     )
 
 SELECT * FROM final_data
