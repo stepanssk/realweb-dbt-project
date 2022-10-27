@@ -352,3 +352,16 @@ models:
         description: "название кампании"
         tests:
           - not_null
+
+  - name: achechkova_af_installs
+    description: "not null campaign and platform tests"
+    columns:
+      - name: platform
+        description: "платформа установки"
+        tests:
+          - accepted_values:
+              values: ['ios', 'android']
+      - name: campaign_name
+        description: "название кампании"
+        tests:
+          - not_null
