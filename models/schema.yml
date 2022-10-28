@@ -352,3 +352,17 @@ models:
         description: "название кампании"
         tests:
           - not_null
+
+  - name: ntolkunov_af_installs
+    description: "данные по установкам"
+    columns:
+      - name: platform
+        description: "платформа"
+        tests:
+          - accepted_values:
+              values: ['ios', 'android']
+
+      - name: campaign_name
+        description: "название кампании"
+        tests:
+          - not_null
