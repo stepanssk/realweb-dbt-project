@@ -273,3 +273,4 @@ WHERE
     campaign_name IS NOT NULL 
 AND 
     platform IN ('ios','android')
+    

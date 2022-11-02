@@ -352,3 +352,16 @@ models:
         description: "название кампании"
         tests:
           - not_null
+
+  - name: vankushev_af_installs
+    description: "установки по источникам"
+    columns:
+      - name: platform
+        description: "платформы для проверки"
+        tests:
+          - accepted_values:
+              values: ['ios', 'android']
+      - name: campaign_name
+        description: "проверка названия кампании"
+        tests:
+          - not_null
