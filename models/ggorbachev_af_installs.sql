@@ -21,7 +21,8 @@ WITH yandex AS (
         costs,
         impressions,
         is_ret_campaign,
-        is_realweb
+        is_realweb,
+        NULL AS installs,
     FROM {{ ref('stg_yandex') }}
 ),
 
@@ -35,7 +36,8 @@ vkontakte AS (
         costs,
         impressions,
         is_ret_campaign,
-        is_realweb
+        is_realweb,
+        NULL AS installs,
     FROM {{ ref('stg_vkontakte') }}
 ),
 
@@ -49,7 +51,8 @@ mytarget AS (
         costs,
         impressions,
         is_ret_campaign,
-        is_realweb
+        is_realweb,
+        NULL AS installs,
     FROM {{ ref('stg_mytarget') }}
 ),
 
@@ -63,7 +66,8 @@ huawei_ads AS (
         costs,
         impressions,
         is_ret_campaign,
-        is_realweb
+        is_realweb,
+        NULL AS installs,
     FROM {{ ref('stg_huawei_ads') }}
 ),
 
@@ -77,42 +81,9 @@ tiktok AS (
         costs,
         impressions,
         is_ret_campaign,
-        is_realweb
+        is_realweb,
+        NULL AS installs,
     FROM {{ ref('stg_tiktok') }}
-),
-
-/* Соединяем таблицы, в которых нету installs */
-
-union_tables_without_installs AS (
-    SELECT * FROM yandex
-    UNION ALL
-    SELECT * FROM vkontakte
-    UNION ALL
-    SELECT * FROM mytarget
-    UNION ALL
-    SELECT * FROM huawei_ads
-    UNION ALL
-    SELECT * FROM tiktok
-),
-
-/* Группируем таблицу с installs, считаем количество установок */
-
-for_join_installs AS (
-    SELECT
-        date,
-        campaign_name,
-        COUNT(appsflyer_id) AS installs
-    FROM {{ ref('stg_af_installs') }}
-    GROUP BY 1,2
-),
-
-/* Джоиним таблицы выше с installs */
-
-join_tables_without_installs AS (
-    SELECT *
-    FROM union_tables_without_installs t1
-    LEFT JOIN for_join_installs t2
-    USING(date, campaign_name)
 ),
 
 /* Приводим таблицы, в которых ЕСТЬ installs, к единому виду */
@@ -147,19 +118,45 @@ facebook AS (
     FROM {{ ref('stg_facebook') }}
 ),
 
-/* Соединяем все таблицы */
+/* Соединяем таблицы, в которых нету installs */
 
 union_tables AS (
-    SELECT * FROM join_tables_without_installs
+    SELECT * FROM yandex
+    UNION ALL
+    SELECT * FROM vkontakte
+    UNION ALL
+    SELECT * FROM mytarget
+    UNION ALL
+    SELECT * FROM huawei_ads
+    UNION ALL
+    SELECT * FROM tiktok
     UNION ALL
     SELECT * FROM google_ads
     UNION ALL
     SELECT * FROM facebook
 ),
 
-/* Добавляем столбец Source */
+/* Группируем таблицу с installs, считаем количество установок */
 
-add_source AS (
+for_join_installs AS (
+    SELECT
+        date,
+        campaign_name,
+        COUNT(appsflyer_id) AS sum_installs
+    FROM {{ ref('stg_af_installs') }}
+    GROUP BY 1,2
+),
+
+/* Джоиним таблицы выше с installs */
+
+join_installs AS (
+    SELECT *
+    FROM union_tables t1
+    LEFT JOIN for_join_installs t2
+    USING(date, campaign_name)
+),
+
+coalesce_installs_and_add_source AS (
     SELECT
         date,
         campaign_name,
@@ -170,15 +167,15 @@ add_source AS (
         impressions,
         is_ret_campaign,
         is_realweb,
-        installs,
+        COALESCE(installs, sum_installs) AS sum_installs,
         {{ install_source('campaign_name') }} AS source
-    FROM union_tables
+    FROM join_installs
 ),
 
 /*  Фильтрация  */
 final AS (
     SELECT *
-    FROM add_source
+    FROM coalesce_installs_and_add_source 
     WHERE 
             is_realweb
         AND NOT
