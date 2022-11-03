@@ -118,7 +118,7 @@ facebook AS (
     FROM {{ ref('stg_facebook') }}
 ),
 
-/* Соединяем таблицы, в которых нету installs */
+/* Соединяем все таблицы */
 
 union_tables AS (
     SELECT * FROM yandex
@@ -136,7 +136,7 @@ union_tables AS (
     SELECT * FROM facebook
 ),
 
-/* Группируем таблицу с installs, считаем количество установок */
+/* Группируем таблицу с installs */
 
 for_join_installs AS (
     SELECT
@@ -155,6 +155,8 @@ join_installs AS (
     LEFT JOIN for_join_installs t2
     USING(date, campaign_name)
 ),
+
+/* Из двух столбцов installs выбираем первое не Null значение, добавляем столбец source */
 
 coalesce_installs_and_add_source AS (
     SELECT
