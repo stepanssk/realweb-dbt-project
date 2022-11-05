@@ -352,3 +352,17 @@ models:
         description: "название кампании"
         tests:
           - not_null
+
+  - name: dlegrand_af_installs
+    description: "установки приложения"
+    columns:
+      - name: platform
+        description: "платформа установки"
+        tests:
+          - accepted_values:
+              values: ['ios', 'android']
+
+      - name: campaign_name
+        description: "название кампании"
+        tests:
+          - not_null
