@@ -1,15 +1,18 @@
-FROM golang:1.13 as builder
-WORKDIR /app
-COPY invoke.go ./
-RUN CGO_ENABLED=0 GOOS=linux go build -v -o server
-
 FROM fishtownanalytics/dbt:1.0.0
-USER root
 WORKDIR /realweb-dbt-project
-COPY --from=builder /app/server ./
-COPY script.sh ./
-COPY . ./
-RUN pip install --no-cache-dir --upgrade pip && \
-    pip install --upgrade --no-cache-dir fal pyTelegramBotAPI
 
-ENTRYPOINT "./server"
+ARG DBT_PROFILES_DIR="."
+ENV DBT_PROFILES_DIR $DBT_PROFILES_DIR
+
+ARG DEV_DATASET="dbt_rsultanov"
+ENV DEV_DATASET $DEV_DATASET
+#/secrets/dbt_runner_for_realweb
+ARG PATH_TO_KEYFILE="./secrets/dbt_runner_for_realweb.json"
+ENV PATH_TO_KEYFILE $PATH_TO_KEYFILE
+
+COPY . ./
+
+RUN dbt deps
+
+#RUN pip install --no-cache-dir --upgrade pip && \
+#    pip install --upgrade --no-cache-dir fal pyTelegramBotAPI
