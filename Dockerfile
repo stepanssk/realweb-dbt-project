@@ -1,4 +1,4 @@
-FROM fishtownanalytics/dbt:1.0.0
+FROM fishtownanalytics/dbt:1.1.0
 WORKDIR /realweb-dbt-project
 
 ARG DBT_PROFILES_DIR="."
@@ -12,7 +12,6 @@ ENV PATH_TO_KEYFILE $PATH_TO_KEYFILE
 
 COPY . ./
 
-RUN dbt deps
-
-#RUN pip install --no-cache-dir --upgrade pip && \
-#    pip install --upgrade --no-cache-dir fal pyTelegramBotAPI
+RUN pip install --no-cache-dir --upgrade pip && \
+    pip install --upgrade --no-cache-dir fal pyTelegramBotAPI && \
+    dbt deps
