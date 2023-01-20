@@ -1,4 +1,4 @@
-FROM fishtownanalytics/dbt:1.1.0
+FROM ghcr.io/dbt-labs/dbt-bigquery:1.2.0
 WORKDIR /realweb-dbt-project
 
 ARG DBT_PROFILES_DIR="."
