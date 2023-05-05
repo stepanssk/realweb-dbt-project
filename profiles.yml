@@ -1,6 +1,3 @@
-# это не тот profiles.yml, который вы ищете (с)
-# нужную вам конфигурацию для profiles.yml в .dbt можно найти в файле README
-# этот файл используется для продакшена в GCP
 config:
   use_colors: false
 
@@ -12,9 +9,9 @@ realweb: # название профиля, которое указали в dbt
       type: bigquery
       method: service-account
       project: realweb-152714 # название проекта в BigQuery
-      dataset: dbt_rsultanov # название вашего личного датасета (если его нет, он будет создан)
+      dataset: "{{ env_var('DEV_DATASET') }}" # название вашего личного датасета (если его нет, он будет создан)
       threads: 4
-      keyfile: /secrets/dbt_runner_for_realweb
+      keyfile: "{{ env_var('PATH_TO_KEYFILE') }}"
       timeout_seconds: 300
       location: US
       priority: interactive
@@ -26,7 +23,7 @@ realweb: # название профиля, которое указали в dbt
       project: realweb-152714 # название проекта в BigQuery
       dataset: dbt_production # название датасета для продакшн среды
       threads: 4
-      keyfile: /secrets/dbt_runner_for_realweb
+      keyfile: "{{ env_var('PATH_TO_KEYFILE') }}"
       timeout_seconds: 300
       location: US
       priority: interactive

@@ -26,70 +26,53 @@ dbt docs serve
 
 ## Как начать работать с проектом?
 
-### Вариант 1 - с использованием Anaconda
+1. [Устанавливаем Visual Studio Code](https://code.visualstudio.com/download)
+2. [Устанавливаем Git](https://git-scm.com/download), вместе с ним установится терминал Git Bash.
+3. Создаем вне проекта (!) папку `secrets`, куда кладем полученный в GCP (или у [@Zzdoba](https://github.com/Zzdoba)) json-ключ. Лучше всего использовать корневую директорию `C:/Users/Username/secrets/`
+4. Открываем новое окно VSCode. Подключаемся к GitHub в VSCode и [скачиваем нужный репозиторий](https://code.visualstudio.com/docs/editor/versioncontrol#_cloning-a-repository). Обычно для этого достаточно перейти на страницу проводника слева (Ctrl+Shift+E), нажать "Clone Repository" и вставить ссылку (https://github.com/realweb-msk/realweb-dbt-project)
+Репозиторий сохраняем в корневую папку "C:\Users\user_name\"
+5. В VSCode создаем файл с переменными среды: нажимаем Ctrl+Shift+P -> Preferences: Open Workspace Settings (JSON), в открывшийся файл вставляем конфиг с переменными среды `terminal.integrated.env.[windows|linux|osx]`. Добавляем в него переменные `PATH_TO_KEYFILE` (путь к json-ключу из предыдущего шага) и `DEV_DATASET` (обычно `dbt_username`) Должно получиться примерно так:
+```json
+{
+    "terminal.integrated.env.windows": {
+        "DBT_PROFILES_DIR":".",
+        "PATH_TO_KEYFILE":"C:/Users/RSultanov/secrets/dbt_runner_for_realweb.json",
+        "DEV_DATASET":"dbt_rsultanov"
+    }
+}
+```
+Не забудьте нажать Ctrl+S чтоб сохранить файл. Выйдите из VSCode и откройте его заново.
 
-Спасибо [@nirakon](https://github.com/nirakon) за подробную инструкцию.
+6. В VSCode устанавливаем расширения `ms-python.python`, `GitHub Pull Requests and Issues`, `Git Graph` в VSCode (желательно ещё установить `innoverio.vscode-dbt-power-user` и `eamodio.gitlens`). Чтобы найти нужное расширение, воспользуйтесь Ctrl+Shift+X и строкой поиска
+7. Устанавливаем Git Bash как дефолтный терминал в VSCode (можно и другой, но тогда процесс установки для вас может усложниться): Ctrl+Shift+P -> Terminal: Select Default Profile -> Git Bash.
+8. Открываем терминал в VSCode (Ctrl+Shift+\`), проверяем в нём версию Python `python --version` или `python3 --version`, если его нет или версия не поддерживается ([должна быть 3.7 - 3.11](https://docs.getdbt.com/dbt-cli/install/pip)), то [устанавливаем](https://www.python.org/downloads/)
+9. Переходим в скаченную папку проекта realweb-dbt-project, если вы еще не в ней (проверить - `pwd`, перейти из корневой папки - `cd realweb-dbt-project`). Запускаем установку `source ./local_install.sh` (или `source ./local_install_wsl.sh` при использовании WSL), ждем несколько минут. Если все сделано правильно, вы увидите сообщение:
 
-1. [Устанавливаем Miniconda](https://docs.conda.io/en/latest/miniconda.html). Если уже стоит Anaconda, то не нужно.
-2. [Устанавливаем Visual Studio Code](https://code.visualstudio.com/download)
-3. [Устанавливаем Git](https://git-scm.com/download)
-4. Запускаем Anaconda Prompt (Miniconda3). Создаём новое пространство для dbt `conda create --name dbt-env pip`.
-Если у Вас установлен python 3.10 (проверить - `python --version`), необходимо вручную прописать версию поменьше, например так: `conda create --name dbt-env python=3.9.0 pip`
-5. Переходим в него `conda activate dbt-env` и устанавливаем dbt  `pip install dbt-bigquery`
-6. Проверяем установку `dbt --version`. 
-7. Устанавливаем расширение `ms-python.python` в VSCode (поиск расширений - CTRL + SHIFT + X).
-8. В VSCode назначаем интерпетатор для Python в созданном пространстве dbt-env (Ctrl+Shift+P -> Python: Select Interpreter -> выбираем наше пространство dbt-env)
-9. Подключаемся к GitHub в VSCode и [скачиваем нужный репозиторий](https://code.visualstudio.com/docs/editor/versioncontrol#_cloning-a-repository) (https://github.com/realweb-msk/realweb-dbt-project). Перед этим на всякий случай сохраните в надежном месте открытые в VSCode файлы. Клонировать репозиторий рекомендую в корневую папку (`C:/Users/Username/`)
-10. В корневой папке создаем папку `.dbt`,  а в ней файл `profiles.yml` для подключения к BigQuery. Этот файл должен находиться за пределами вашего проекта dbt, чтобы избежать передачи конфиденциальных учетных данных в git. DBT будет искать этот файл именно по этому адресу: `C:/Users/Username/.dbt/profiles.yml`. В `profiles.yml` копируем и сохраняем следующий код:
+![image](https://user-images.githubusercontent.com/43750521/161025724-31f26002-b351-4f1e-81d6-35a340f8c3c9.png)
 
- ```yml
-# Пример profiles.yml. Обычно используется две среды dev (development) и prod (production)
+<details>
+<summary>Что происходит в local_install.sh?</summary>
+<br>
 
-realweb:
-  outputs:
-    dev:
-      dataset: dbt_username # ! не забудь поменять на своё имя!
-      fixed_retries: 1
-      keyfile: /Users/Username/secrets/dbt_runner_for_realweb.json #! не забудь поменять на адрес до своего json-ключа!
-      method: service-account
-      priority: interactive
-      project: realweb-152714
-      threads: 4
-      timeout_seconds: 300
-      location: US
-      type: bigquery
-    prod:
-      dataset: dbt_production
-      keyfile: /Users/Username/secrets/dbt_runner_for_realweb.json #! не забудь поменять на адрес до своего json-ключа!
-      method: service-account
-      priority: interactive
-      project: realweb-152714
-      threads: 4
-      timeout_seconds: 300
-      location: US
-      type: bigquery
-  target: dev
- ```
-Также необходимо получить json-ключ в GCP *(или попросить его у меня)* и положить его в надёжное место (например,в папку `secrets`)
+* переходим на один уровень выше (в корневую директорию)
+* устанавливаем пакет `virtualenv` и создаем виртуальное окружение `realweb-dbt-env`
+* активируем его, устанавливаем в него dbt нужной версии
+* возвращаемся в папку проекта realweb-dbt-project
+* выполняем команды `dbt deps` и `dbt debug`
+* завершаем исполнение скрипта, оставаясь в новом виртуальном окружении
 
-11. Возвращаемся в консоль:) Убеждаемся, что мы находимся в папке проекта (последняя папка в адресе - `\realweb-dbt-project`. Если не там, то выполняем `cd realweb-dbt-project`). Выполняем в консоли `dbt debug`. Если всё хорошо, можно начать пользоваться dbt.
-12. Открыть консоль можно и в самом VSCode. Нажмите на "Терминал" , затем - "создать терминал", а потом в открывшемся окне справа выберите (˅) нужную вам консоль (н-р `command prompt`) 
+При желании или при необходимости (например при выборе дефолтной консоли `command prompt` или при желании использовать другое виртуальное окружение) вы можете пройти эти шаги можно самостоятельно
+</details>
 
-### Вариант 2 - без использования Anaconda
-
-Основаная суть - вместо установки Miniconda устанавливаем пакет для виртуальных сред (см. https://packaging.python.org/en/latest/guides/installing-using-pip-and-virtual-environments/)
-
-1. Устанавливаем virtual env: `py -m pip install --user virtualenv`
-2. Создаем виртуальную среду: `py -m venv dbt-env`
-3. Активируем созданную среду: `.\dbt-env\Scripts\activate`
-4. Далее действуем аналогично варианту с cond-ой - переходим к инструкции выше во вторую часть пункта 5 (устанавливаем dbt `pip install dbt-bigquery` ...)
+10. В VSCode назначаем интерпетатор для Python в созданном виртуальном окружении (Ctrl+Shift+P -> Python: Select Interpreter -> Введите путь к интерпретатору -> Найти -> Ищем свое вирутальное окружение `realweb-dbt-env` -> В нем ищем Scripts, а там файл `python`)
+11. Можете пользоваться dbt!
 
 ## Если я хочу создать свой проект?
 
 1. [Укрепиться в решении - Вводный вебинар от OWOX про dbt](https://www.youtube.com/watch?v=eLDV_y0Chow)
 2. [Пройти небольшой бесплатный курс по dbt](https://courses.getdbt.com/)
 3. [Первые шаги](https://docs.getdbt.com/dbt-cli/install/overview)
-4. [Запускаем dbt в продакшн на Google Cloud Platform](https://github.com/realweb-msk/realweb-dbt)
+4. [Запускаем dbt в продакшн на Google Cloud Platform](https://medium.com/@ivan_toriya/step-by-step-guide-to-run-dbt-in-production-with-google-cloud-platform-fb1f035f3c7b)
 
 ## Задание по dbt
 
