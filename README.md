@@ -45,8 +45,8 @@ dbt docs serve
 
 6. В VSCode устанавливаем расширения `ms-python.python`, `GitHub Pull Requests and Issues`, `Git Graph` в VSCode (желательно ещё установить `innoverio.vscode-dbt-power-user` и `eamodio.gitlens`). Чтобы найти нужное расширение, воспользуйтесь Ctrl+Shift+X и строкой поиска
 7. Устанавливаем Git Bash как дефолтный терминал в VSCode (можно и другой, но тогда процесс установки для вас может усложниться): Ctrl+Shift+P -> Terminal: Select Default Profile -> Git Bash.
-8. Открываем терминал в VSCode (Ctrl+Shift+\`), проверяем в нём версию Python `python --version` или `python3 --version`, если его нет или версия не поддерживается ([должна быть 3.7 - 3.11](https://docs.getdbt.com/dbt-cli/install/pip)), то [устанавливаем](https://www.python.org/downloads/)
-9. Переходим в скаченную папку проекта realweb-dbt-project, если вы еще не в ней (проверить - `pwd`, перейти из корневой папки - `cd realweb-dbt-project`). Запускаем установку `source ./local_install.sh` (или `source ./local_install_wsl.sh` при использовании WSL), ждем несколько минут. Если все сделано правильно, вы увидите сообщение:
+8. Открываем терминал в VSCode (Ctrl+Shift+\`), проверяем в нём версию Python `python --version` или `python3 --version` или `py --version`, если его нет или версия не поддерживается ([должна быть 3.7 - 3.10](https://docs.getdbt.com/dbt-cli/install/pip)), то [устанавливаем](https://www.python.org/downloads/)
+9. Переходим в скаченную папку проекта realweb-dbt-project, если вы еще не в ней (проверить - `pwd`, перейти из корневой папки - `cd realweb-dbt-project`). Смотрим на файл **local_install.sh**, при необходимости меняем `python` во 2 и 3 строке на `py` или `python3` (см. п.8). Запускаем установку `source ./local_install.sh` (или `source ./local_install_wsl.sh` при использовании WSL), ждем несколько минут. Если все сделано правильно, вы увидите сообщение:
 
 ![image](https://user-images.githubusercontent.com/43750521/161025724-31f26002-b351-4f1e-81d6-35a340f8c3c9.png)
 
