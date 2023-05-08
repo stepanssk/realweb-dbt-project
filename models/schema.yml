@@ -33,3 +33,20 @@ models:
         tests:
           - unique
           - not_null
+
+- name: msolokhina_af_installs
+    description: "установки приложения"
+    columns:
+      - name: PLATFORM
+        description: "платформа установки"
+        tests:
+          - accepted_values:
+              values: ['ios', 'android']
+              
+    - name: msolokhina_af_installs
+    description: "установки приложения"
+    columns:
+      - name: CAMPAIGN_NAME
+        description: "Кампания"
+        tests:
+          - not_null

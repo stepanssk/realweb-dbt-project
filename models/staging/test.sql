@@ -1,0 +1,5 @@
+SELECT
+SOURCE,
+COUNT(APPSFLYER_ID) AS INSTALLS
+FROM {{ ref('stg_af_installs') }} 
+GROUP BY SOURCE
