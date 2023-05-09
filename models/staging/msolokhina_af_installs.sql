@@ -1,13 +1,6 @@
-/*Партицирование по дате*/
-{{ config(
-    materialized='partition_msolokhina_af_installs',
-    partition_by={
-      "field": "DATE",
-      "data_type": "date",
-      "granularity": "month"
-    }
-)}}
+{% if target.name == 'prod' %}
 
+{% endif %}
 /* Объединяю все таблицы по источникам, где нет данных установок:*/
 WITH Total_table AS(
 
@@ -81,7 +74,17 @@ FROM {{ ref('stg_huawei_ads') }}
 WHERE IS_REALWEB=True AND IS_RET_CAMPAIGN=False
 
 )
-
+SELECT
+DATE,
+CAMPAIGN_NAME,
+PLATFORM,
+CLICKS,
+IMPRESSIONS,
+COSTS,
+ADSET_NAME,
+SOURCE,
+INSTALLS
+FROM(
 /* Чтобы добавить кол-во установок делаю лефт джойн с моделью stg_af_installs */
 SELECT 
 A.DATE AS DATE,
@@ -141,6 +144,6 @@ ADSET_NAME,
 INSTALLS
 FROM {{ ref('stg_facebook') }}
 WHERE IS_REALWEB=True AND IS_RET_CAMPAIGN=False
-
-
+)
+WHERE PLATFORM="ios" OR PLATFORM="android"
 
