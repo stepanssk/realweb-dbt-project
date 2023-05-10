@@ -33,3 +33,18 @@ models:
         tests:
           - unique
           - not_null
+
+  - name: uplusnina_af_installs
+    description: "проверка платформ и кампаний"
+    columns:
+      - name: platform
+        description: "платформа"
+        tests:
+          - accepted_values:
+              values: ['ios', 'android']
+
+      - name: campaign_name
+        description: "кампания"
+        tests:
+          - not_null
+
