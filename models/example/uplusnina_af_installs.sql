@@ -89,7 +89,7 @@ huawei_ads AS (
                     'undefined' AS  adset_name,
                     platform,
                     'huawei' AS source,
-                    NULL AS installs,
+                    0 AS installs,
                     clicks,
                     costs,
                     impressions
@@ -109,7 +109,7 @@ mytarget AS (
                 IF(adset_name = '-', 'undefined', adset_name) AS adset_name,
                 platform,
                 'mytarget' AS source,
-                NULL AS installs,
+                0 AS installs,
                 clicks,
                 costs,
                 impressions
@@ -127,7 +127,7 @@ tiktok AS (
                 adset_name,
                 platform,
                 'tiktok' AS source,
-                NULL AS installs,
+                0 AS installs,
                 clicks,
                 costs,
                 impressions
@@ -147,7 +147,7 @@ vkontakte AS (
                 IF(adset_name = '-', 'undefined', adset_name) AS adset_name,
                 platform,
                 'vkontakte' AS source,
-                NULL AS installs,
+                0 AS installs,
                 clicks,
                 costs,
                 impressions
@@ -168,7 +168,7 @@ yandex AS (
                 IF(adset_name = '--', 'undefined', adset_name) AS adset_name,
                 platform,
                 'yandex' AS source,
-                NULL AS installs,
+                0 AS installs,
                 clicks,
                 costs,
                 impressions
@@ -181,34 +181,22 @@ yandex AS (
 unioned_sources AS (
                     SELECT *
                     FROM facebook
-
                     UNION ALL
-
                     SELECT *
                     FROM google_ads
-
                     UNION ALL
-
                     SELECT *
                     FROM huawei_ads
-
                     UNION ALL
-
                     SELECT *
                     FROM mytarget
-
                     UNION ALL
-
                     SELECT *
                     FROM tiktok
-
                     UNION ALL
-
                     SELECT *
                     FROM vkontakte
-
                     UNION ALL
-
                     SELECT *
                     FROM yandex
                     ),
@@ -219,6 +207,21 @@ unioned_sources AS (
 для этого все 0 заменяю на NULL, чтобы в финальной таблице
 сработала проверка IFNULL(IFNULL(filtered_sources.installs, af_installs.installs), 0)
 */
+
+grouped_sources AS (
+                    SELECT
+                        date,
+                        campaign_name,
+                        adset_name,
+                        platform,
+                        source,
+                        SUM(installs) AS installs,
+                        SUM(costs) AS costs,
+                        SUM(impressions) AS impressions,
+                        SUM(clicks) AS clicks
+                    FROM unioned_sources
+                    GROUP BY date, campaign_name, platform, source, adset_name
+                    ),
 
 transformed_sources AS (
                     SELECT
@@ -231,7 +234,7 @@ transformed_sources AS (
                         costs,
                         impressions,
                         clicks
-                    FROM unioned_sources
+                    FROM grouped_sources
                     WHERE (platform = 'android' OR platform = 'ios')
                     AND campaign_name IS NOT NULL
                     ),
@@ -246,6 +249,7 @@ impressions, installs. Это позволит не потерять данны�
 в будущем дашборде мы должны учитывать, что для некоторых кампаний информация о installs
 не будет разбиваться по группам обьявлений.
  */
+
 
 final_table AS (
             SELECT
@@ -273,21 +277,19 @@ final_table AS (
 неиформативные строки нужно отфильтровать.
 */
 
-grouped_final_table AS (
+filtered_final_table AS (
                         SELECT
                             date,
                             campaign_name,
                             adset_name,
                             platform,
                             source,
-                            SUM(clicks) AS clicks,
-                            SUM(costs) AS costs,
-                            SUM(impressions) AS impressions,
-                            SUM(installs) AS installs
+                            clicks,
+                            costs,
+                            impressions,
+                            installs
                         FROM final_table
                         WHERE clicks + costs + impressions + installs > 0
-                        GROUP BY date,
-                        date, campaign_name, platform, source, adset_name
                         )
 
 
@@ -301,4 +303,4 @@ SELECT
     costs,
     impressions,
     installs
-FROM grouped_final_table
+FROM filtered_final_table
