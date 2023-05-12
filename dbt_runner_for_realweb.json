@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "realweb-152714",
+  "private_key_id": "51c97ebfbf848906db9d9784d7ca8fd4429976df",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCnOm2UQag8Nsqm\nWZR0tz2Gl/IeLbp9IBpPqRvboRjVrvGq4OJky5oNv9qUPj61VvZaysFkZV1eAW6q\ng5d1wdbGMfQlaecbK5PfrusTuafo7K+6YrPV+P2AGv0N2Aqe0QdZYaseS5gkX675\nytc6SDN0sHSSbykBtz66o8iUuvmwsvhOp97OQpBTBpSfANeGoYU0YsNUqKuE/j13\nILpdePLkAKLHvzhqUJ85lQVChKWbXa/nIxhF3wpIH4O22qTLPf28wmuwX9AELIBq\nJhvir+Nba4++hAmV+WAgcbsMM7dPGGYuPVcL9ct7o6Lyy4yfl/LKWX4wLGll/rVV\nhUzlOR1dAgMBAAECggEAAiHu3U3kCxaIyYvJZp6imHmOEx/yqZ9T7pGhwxCAHFN9\njfgNswrcpVG9xBeyHYZlIF3HDxRy1xzOEDsa3pvQ9RiUfDioQ5Kv8VGN+mOq9j+0\ncvxIvlENTImrkfZgFkvkm9lwwPNmVopo1RMm4P2kOFf6uJZVz8mKMX+esnTa88uj\nJ5nUIs+004Dwd8ctjFskyGaiX0HxBQ4VFHte5RsbIjudWrkx68WXsinOgVBtp5GC\n1q7HrOp6tZLRwyfnk998r0rhF0312behWOwIVwiqepyr8hM/qj/6k0CyhwemZIoJ\noyI4OU/4ZCvVX6xhoxQ2zU1/nDTWsCOPwkQIZpf2sQKBgQDsTqMcxVZ6XQEv0EoN\n6smtWSUUjLAgkQG3RHSQN9bv8l4ntsYq+qVip7rQgMkDJLznJGWDT8BxwMmlSJn2\nu3ViZdznXYu6uGPFMY9L8hu1KRdS/kd3JEubNdNzAK3VYdYOQ4apVEDQ4O0ezG86\nReGzNidn4V5IgWJ1vXubd9dA8QKBgQC1KhChrRO2BWiSJs9/s17Out+27nhXzNLm\nqpvQjtnDbv5FW7KiFYhTscjZDlTMz93/m5KqREIW8U98klinZBN7eVZGeAeSmYRA\nOIyfrOHTmKrn5070KG0dSwXh0gkB9HqS+4cq1gyFjMiTKDJqQUCpQFPO39wFfCh+\ncNE0Qp3jLQKBgAFgm/bI964S6LTco/Hc0nweLuclwskNz1LAJWXJzYjsgrv8hr8t\nYtVmYOJiPcm05xz5y1Wum1KOax55g9w6T37ZVSZMF0ppVLuLhGhO6vZtXONw8/2v\nynkHIUpkUJ8TyOmgXyKRiScuiHNLgcJ3Mc+XmzcxyxjlGCvThOrtEeYhAoGAcbIm\nofDnT/Lw/9hPnUtLEt8BC+N5r1Cig5VLGIaucBK2jXzRDRwKZMxMyrxNyAQkxQgz\n8ZvJBnEHe5y0+si52WH7HVqzFfQ2pb9XsdZkG9HSYJwwVtcQM7QjyudwM8PlMV2e\nJOoVDbOfJYuyqDCvjgkLD+g6Q076cvAGu4+bWzkCgYEAhNLpXPWgAQ7E67Viwg04\n3EPWndcepRAU6RkeFGB/CvcGPJq46VTIs5BVx+BK6ZvCpsiO2sncRdmmkJh/hp9n\nKSgUawOJQZAZuWyDzadxp/WjeN2WpZw3J6szca2mi7LJMm4Fh/Yb/V+ZEfl/Ffk/\nXS4NDdKQ1esCW7eocy5lmnI=\n-----END PRIVATE KEY-----\n",
+  "client_email": "dbt-runner-for-realweb@realweb-152714.iam.gserviceaccount.com",
+  "client_id": "112644018488057702627",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/dbt-runner-for-realweb%40realweb-152714.iam.gserviceaccount.com"
+}
