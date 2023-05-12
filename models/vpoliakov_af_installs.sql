@@ -28,6 +28,7 @@ FROM
 WHERE
     is_realweb
     AND NOT is_ret_campaign
+    AND source != 'other'
 GROUP BY
     1,2,3,4,5
 ),
